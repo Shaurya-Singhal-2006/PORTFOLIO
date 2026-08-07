@@ -1,0 +1,17 @@
+<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="s-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#5227FF" />
+      <stop offset="100%" stopColor="#00C9FF" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Left Bracket: < -->
+  <path d="M11 9L4 16L11 23" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+  
+  <!-- Right Bracket: > -->
+  <path d="M21 9L28 16L21 23" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+  
+  <!-- The "S" Slash -->
+  <path d="M19 6L12 14L21 18L14 26" stroke="url(#s-gradient)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+</svg>

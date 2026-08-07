@@ -1,0 +1,135 @@
+/* Base Header State (Top of page) */
+.glass-header {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  width: 70%;
+  max-width: 1200px;
+  padding: 1.25rem 2rem;
+  border-radius: 24px;
+  
+  /* Glassmorphic Background */
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  
+  transition: 
+    width 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+    padding 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+    background-color 0.6s ease,
+    border-color 0.6s ease,
+    top 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+    border-radius 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Collapsed Header State (Scrolled down) */
+.glass-header.scrolled {
+  top: 1rem;
+  /* 💡 Increased slightly to 330px to perfectly accommodate the larger links */
+  width: 330px; 
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px; 
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* --- Inner Elements Transitions --- */
+
+.glass-header .logo,
+.glass-header .cta-button {
+  display: inline-block;
+  white-space: nowrap;
+  opacity: 1;
+  max-width: 200px;
+  transition: 
+    opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    max-width 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+    margin 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+    padding 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.glass-header .logo {
+  color: #ffffff;
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+}
+
+.glass-header .nav-links {
+  display: flex;
+  gap: 2.25rem; /* Slightly widened gap */
+  transition: gap 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 💡 NAVIGATION LINKS STYLE & ANIMATION */
+.glass-header .nav-links a {
+  position: relative;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: 1.15rem; /* 💡 Made links noticeably bigger (originally 0.95rem) */
+  font-weight: 500;
+  padding: 4px 0;
+  transition: color 0.3s ease, font-size 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.glass-header .nav-links a:hover {
+  color: #ffffff;
+}
+
+/* 💡 Underline Effect: Hidden Starting State */
+.glass-header .nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #ffffff; /* pure white line to match typography style */
+  transform: translateX(-50%);
+  transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* subtle glow on underline */
+}
+
+/* 💡 Underline Effect: Expand to 100% on Hover */
+.glass-header .nav-links a:hover::after {
+  width: 100%;
+}
+
+.glass-header .cta-button {
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* --- Scrolled State Changes --- */
+
+.glass-header.scrolled .logo,
+.glass-header.scrolled .cta-button {
+  opacity: 0;
+  max-width: 0;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.glass-header.scrolled .nav-links {
+  gap: 1.5rem; /* Adjusted for the collapsed view */
+}
+
+.glass-header.scrolled .nav-links a {
+  font-size: 1.05rem; /* Slightly smaller size in collapsed view */
+}

@@ -1,0 +1,36 @@
+.curved-loop-jacket {
+  /* 💡 Reduced from 100vh to a sleek, modern footer height */
+  min-height: 180px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 5rem; /* Generous spacing below your projects section */
+  margin-bottom: 3rem;
+  overflow: hidden;
+}
+
+.curved-loop-svg {
+  width: 100%;
+  aspect-ratio: 100 / 12;
+  overflow: visible;
+  display: block;
+  
+  /* 💡 Perfectly proportioned font size for the curved vector path */
+  font-size: 4rem; 
+  fill: #ffffff;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 2px;
+  
+  /* Prevent user selection issues when dragging the interactive ribbon */
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Subtle glowing drop shadow to make the text pop off your dark background */
+.curved-loop-svg textPath {
+  filter: drop-shadow(0px 4px 12px rgba(255, 255, 255, 0.1));
+}

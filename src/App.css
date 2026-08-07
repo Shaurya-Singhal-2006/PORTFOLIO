@@ -1,0 +1,87 @@
+/* --- Global CSS Reset --- */
+
+/* 
+  This removes the default browser margin that causes the grey bars on the sides, 
+  and ensures your app fills the entire screen.
+*/
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* Prevents any accidental horizontal scrolling */
+  background-color: #000000; /* Ensures the base color is black */
+}
+
+/* 
+  This helps make scrolling smoother and more consistent across browsers.
+*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 💡 THE MAGIC FIX FOR THE CUT-OFF ISSUE */
+/* 
+  React (especially Vite) puts a default max-width and padding on the #root element.
+  This forces it to span the full width so your Bento Grid and Carousels stop getting clipped!
+*/
+#root {
+  max-width: none !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  text-align: left !important;
+}
+
+/* ========================================================
+   💡 LOADING SCREEN OVERLAY - 4.0s ULTRALONG THEATRICAL TRANSITION
+   ======================================================== */
+.loading-screen {
+  position: fixed;
+  inset: 0; /* Covers the whole screen */
+  background-color: #000000;
+  z-index: 999999; /* Sit on top of absolutely everything */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* 💡 Stretched to 4.0s with an ultra-slow release curve for maximum smoothness */
+  transition: opacity 4.0s cubic-bezier(0.12, 1, 0.2, 1), 
+              visibility 4.0s cubic-bezier(0.12, 1, 0.2, 1);
+}
+
+/* When state changes to false, this class is added */
+.loading-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loading-counter {
+  font-size: clamp(4rem, 8vw, 8rem);
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  font-family: system-ui, -apple-system, sans-serif;
+  letter-spacing: -2px;
+  
+  /* 💡 The number fades and blurs beautifully over 3.2 seconds */
+  transition: transform 4.0s cubic-bezier(0.12, 1, 0.2, 1),
+              opacity 3.2s cubic-bezier(0.12, 1, 0.2, 1),
+              filter 3.2s cubic-bezier(0.12, 1, 0.2, 1);
+}
+
+/* 💡 THE EXPORT MOVEMENT: A wider, highly immersive scale, drift, and massive blur */
+.loading-screen.fade-out .loading-counter {
+  transform: scale(1.3) translateY(-70px); /* 💡 Floats higher and scales larger for extreme depth */
+  opacity: 0;
+  filter: blur(35px); /* 💡 Increased to 35px blur so the number melts away like mist */
+}
+
+hr {
+  border: none;
+  height: 0.1px;
+  background: rgba(255, 255, 255, 0.5);
+}

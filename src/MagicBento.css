@@ -1,0 +1,390 @@
+:root {
+  --hue: 27;
+  --sat: 69%;
+  --white: hsl(0, 0%, 100%);
+  --glow-primary: rgba(255, 255, 255, 1);
+  --glow-soft: rgba(255, 255, 255, 0.2);
+  --glow-border: rgba(255, 255, 255, 0.8);
+  --border-color: #2F293A;
+  --background-dark: #120F17;
+  color-scheme: light dark;
+}
+
+.bento-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-grid {
+  display: grid;
+  gap: 0.75em;
+  padding: 0.75em;
+  max-width: 60em;
+  width: 100%;
+  margin: 0 auto;
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.5rem);
+
+  /* 4-card layout: tall photo | wide about-me | two stacked cards.
+     Matches: [ 1 ][   2   ][ 3 ]
+              [ 1 ][   2   ][ 4 ] */
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: repeat(2, minmax(220px, 1fr));
+}
+
+.magic-bento-card:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.magic-bento-card:nth-child(2) {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+.magic-bento-card:nth-child(3) {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.magic-bento-card:nth-child(4) {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.magic-bento-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  isolation: isolate; /* keeps the ::before sheen contained to this card's own stacking context */
+  min-height: 220px;
+  width: 100%;
+  max-width: 100%;
+  padding: 1.25em;
+  border-radius: 20px;
+
+  /* Glassmorphism: a thin tinted pane, not a flat translucent box. */
+  --glass-blur: 10px;
+  background:
+    linear-gradient(
+      165deg,
+      rgba(255, 255, 255, 0.10) 0%,
+      rgba(255, 255, 255, 0.04) 45%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+
+  /* A single flat border reads flat. Real glass has a bright top-left edge
+     catching light and a darker bottom-right edge. */
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.03);
+
+  font-weight: 300;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-intensity: 0;
+  --glow-radius: 200px;
+}
+
+/* Soft diagonal sheen across the top of the glass, like light grazing
+   the surface. Sits above the background but below the card content. */
+.magic-bento-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.03) 22%,
+    transparent 40%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.magic-bento-card__header,
+.magic-bento-card__content {
+  z-index: 1; /* stay above the ::before sheen */
+}
+
+.magic-bento-card:hover {
+  transform: translateY(-4px);
+  background:
+    linear-gradient(
+      165deg,
+      rgba(255, 255, 255, 0.14) 0%,
+      rgba(255, 255, 255, 0.06) 45%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.04);
+}
+
+/* Photo card: the image fills the card edge-to-edge instead of sitting
+   inside the usual padding. */
+.magic-bento-card--photo {
+  padding: 0;
+}
+
+.magic-bento-card__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.magic-bento-card__photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1em;
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.magic-bento-card__header,
+.magic-bento-card__content {
+  display: flex;
+  position: relative;
+  color: var(--white);
+  height: 100%;
+}
+
+.magic-bento-card__header {
+  gap: 0.75em;
+  justify-content: space-between;
+}
+
+.magic-bento-card__content {
+  flex-direction: column;
+}
+
+.magic-bento-card__label {
+  font-size: 16px;
+}
+
+.magic-bento-card__title,
+.magic-bento-card__description {
+  --clamp-title: 1;
+  --clamp-desc: 2;
+}
+
+.magic-bento-card__title {
+  font-weight: 400;
+  font-size: 22px;
+  margin: 0 0 0.5em 0; /* Adjusted for title breathing room */
+}
+
+.magic-bento-card__description {
+  font-size: 16px;
+  line-height: 1.2;
+  opacity: 0.9;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.magic-bento-card--text-autohide .magic-bento-card__title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: var(--clamp-title);
+  line-clamp: var(--clamp-title);
+}
+
+/* Keep standard ellipsis only for non-compact text cards */
+.magic-bento-card--text-autohide .magic-bento-card__description:not(.magic-bento-card__description--compact) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: var(--clamp-desc);
+  line-clamp: var(--clamp-desc);
+}
+
+/* ========================================================
+   💡 Compact Styles for the long About Me description
+   ======================================================== */
+.magic-bento-card__description.magic-bento-card__description--compact {
+  display: block !important;                       
+  overflow: visible !important;                     
+  font-size: clamp(0.9rem, 1.15vw, 1.15rem) !important; 
+  line-height: 1.7 !important;                     
+  color: rgba(255, 255, 255, 0.85) !important;      
+  letter-spacing: 0.3px !important;                 
+  text-align: justify !important;                   
+  margin-top: 16px !important;                      
+}
+
+/* Below this width the 3-column layout gets cramped, so all four cards
+   stack full-width in order. */
+@media (max-width: 700px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0.5em;
+  }
+
+  .magic-bento-card,
+  .magic-bento-card:nth-child(1),
+  .magic-bento-card:nth-child(2),
+  .magic-bento-card:nth-child(3),
+  .magic-bento-card:nth-child(4) {
+    grid-column: 1;
+    grid-row: auto;
+    width: 100%;
+    min-height: 200px;
+  }
+  
+  /* Reset responsive properties on mobile stacks */
+  .magic-bento-card__description.magic-bento-card__description--compact {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+/* Border glow effect */
+.magic-bento-card--border-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 6px;
+  background: radial-gradient(
+    var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+    rgba(255, 255, 255, calc(var(--glow-intensity) * 0.8)) 0%,
+    rgba(255, 255, 255, calc(var(--glow-intensity) * 0.4)) 30%,
+    transparent 60%
+  );
+  border-radius: inherit;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.magic-bento-card--border-glow:hover::after {
+  opacity: 1;
+}
+
+.magic-bento-card--border-glow:hover {
+  box-shadow:
+    0 4px 20px rgba(255, 255, 255, 0.15),
+    0 0 30px var(--glow-soft);
+}
+
+/* Global spotlight styles */
+.global-spotlight {
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+  z-index: 200 !important;
+  pointer-events: none;
+}
+
+.bento-section {
+  position: relative;
+  user-select: none;
+}
+
+/* HIGHLIGHTED TEXT GLOW */
+.magic-bento-card__description--compact strong {
+  font-weight: 700 !important;
+  color: #ffffff !important; 
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.35); 
+}
+
+/* ========================================================
+   💡 REVISED: Optimized Minimalist Clean Social Link List
+   ======================================================== */
+.bento-socials-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px !important;              /* Sleek, cohesive gap */
+  margin-top: auto !important;      /* Push lists flush to the bottom */
+  margin-bottom: 4px !important;
+  width: 100% !important;
+}
+
+.bento-list-item {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  text-decoration: none !important;
+  
+  /* 💡 BUMPED: Set to exactly 13.5px. Crisp, legible, yet small enough to avoid card overflow */
+  font-size: 13.5px !important; 
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  
+  padding: 5px 0 !important;       /* Tightened padding */
+  border-bottom: none !important;  /* 💡 REMOVED: Deleted the underline border entirely */
+  transition: color 0.25s ease, border-color 0.25s ease !important;
+}
+
+.list-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important; /* Space between logo and name */
+}
+
+/* Micro scaling for the SVG logos to match the 13.5px text */
+.list-icon {
+  width: 16px !important;  /* Slightly bumped to match 13.5px text */
+  height: 16px !important;
+  opacity: 0.6;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease !important;
+}
+
+/* Arrow default style */
+.list-arrow {
+  opacity: 0; 
+  font-size: 0.85rem !important;
+  transform: translateX(-4px) translateY(4px);
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease !important;
+}
+
+/* 💡 HOVER EFFECTS */
+.bento-list-item:hover {
+  color: #ffffff !important; 
+}
+
+.bento-list-item:hover .list-icon {
+  opacity: 1 !important;
+  transform: scale(1.15) !important; /* Elegant pop */
+}
+
+.bento-list-item:hover .list-arrow {
+  opacity: 1 !important; 
+  transform: translateX(0) translateY(0) !important; /* Smooth up-right slide */
+}
