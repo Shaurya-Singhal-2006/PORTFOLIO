@@ -42,7 +42,7 @@
   will-change: flex-grow, transform;
   -webkit-tap-highlight-color: transparent;
   transition: border 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-}
+}  
 
 .ag-panel:hover {
   background: rgba(255, 255, 255, 0.06); 
@@ -142,8 +142,8 @@
 .ag-panel__label {
   position: absolute;
   left: 20px;
-  bottom: 20px;
-  right: 20px;
+  bottom: 24px;       /* 💡 Adjusted slightly upward to give larger text extra breathing room */
+  width: max-content; /* 💡 Replaced 'right: 20px' so rotated text isn't compressed */
   display: flex;
   align-items: center;
   gap: 12px;
@@ -165,7 +165,7 @@
   color: var(--ag-text);
   font-family: inherit;
   font-weight: 600;
-  font-size: clamp(1rem, 1.4vw, 1.4rem);
+  font-size: clamp(1.25rem, 1.8vw, 1.85rem); /* 📈 Your updated larger text size clamp */
   letter-spacing: 0.01em;
   white-space: nowrap;
   overflow: hidden;

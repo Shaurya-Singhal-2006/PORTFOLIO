@@ -2,7 +2,7 @@ import { useRef, useEffect, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 import './AccordionGallery.css'; // Ensure this matches your CSS filename
 
-// 💡 UPDATED: Configured with your exact tech stack!
+// 💡 Configured with your exact tech stack!
 const DEFAULT_CATEGORIES = [
   { 
     label: 'Languages', 
@@ -24,14 +24,14 @@ const DEFAULT_CATEGORIES = [
   { 
     label: 'Database', 
     skills: [
-      { name: 'SQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg' } // Premium MySQL/SQL Icon
+      { name: 'SQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg' } 
     ]
   },
   { 
     label: 'Tools & Platform', 
     skills: [
       { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg' },
-      { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg' } // Crisp GitHub branding
+      { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg' } 
     ]
   }
 ];
@@ -121,11 +121,27 @@ const SkillsAccordion = ({
           );
         }
 
+        // --- UPDATED LABEL ANIMATION LOGIC HERE ---
         if (showLabels && bar && text && skills) {
+          const labelNode = bar.parentNode; 
+          
           if (isActive) {
-            tl.to([bar, text, skills], { opacity: 1, x: 0, duration: dur, ease, stagger: prefersReduced ? 0 : stagger }, 0);
+            tl.to(skills, { opacity: 1, x: 0, duration: dur, ease, stagger: prefersReduced ? 0 : stagger }, 0);
+            tl.to([bar, text], { opacity: 1, duration: dur, ease }, 0);
+            tl.to(labelNode, { opacity: 1, rotation: 0, x: 0, y: 0, transformOrigin: "left bottom", duration: dur, ease }, 0);
           } else {
-            tl.to([bar, text, skills], { opacity: 0, x: -14, duration: dur * 0.6, ease }, 0);
+            tl.to(skills, { opacity: 0, x: -14, duration: dur * 0.6, ease }, 0);
+            tl.to([bar, text], { opacity: 1, duration: dur, ease }, 0);
+            
+            tl.to(labelNode, { 
+              opacity: 1, 
+              rotation: vertical ? 0 : -90, 
+              x: vertical ? 0 : 24, // 💡 UPDATED: Increased from 10 to 24 for a much stronger right shift
+              y: vertical ? 0 : 22, 
+              transformOrigin: "left bottom", 
+              duration: dur, 
+              ease 
+            }, 0);
           }
         }
       });
