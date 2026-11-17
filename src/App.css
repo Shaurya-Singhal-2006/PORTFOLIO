@@ -4,7 +4,7 @@ html {
 }
 
 :root {
-  --section-nav-offset: 0px;
+  --section-nav-offset: 24px;
 }
 
 /* Page frame and intro overlay. */
@@ -236,7 +236,7 @@ html {
   left: 0;
   isolation: isolate;
   display: flex;
-  min-height: 104px;
+  min-height: 82px;
   align-items: center;
   padding: 0 clamp(24px, 6vw, 116px);
   background: transparent;
@@ -251,7 +251,9 @@ html {
   width: 100%;
   height: 100%;
   border: 0;
-  background: linear-gradient(to bottom, rgba(15, 14, 14, .3), transparent);
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
   content: '';
   transition:
     left .55s cubic-bezier(.22, 1, .36, 1),
@@ -294,7 +296,9 @@ html {
   transform: translateX(-50%);
   border: 0;
   border-radius: 999px;
-  background: linear-gradient(to bottom, rgba(15, 14, 14, .3), transparent);
+  background: rgba(8, 12, 20, .25);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 .site-header.is-scrolled .site-name {
@@ -413,10 +417,10 @@ html {
   position: relative;
   z-index: 3;
   display: grid;
-  min-height: calc(100svh - var(--section-nav-offset));
-  align-items: center;
-  padding: 24px;
-  scroll-margin-top: var(--section-nav-offset);
+  min-height: 100svh;
+  align-items: start;
+  padding: calc(24px + var(--section-nav-offset)) 24px 24px;
+  scroll-margin-top: 0;
 }
 
 .about-content {
@@ -458,11 +462,11 @@ html {
   position: relative;
   z-index: 3;
   display: grid;
-  min-height: calc(100svh - var(--section-nav-offset));
-  align-items: center;
-  padding: 24px;
+  min-height: 100svh;
+  align-items: start;
+  padding: calc(24px + var(--section-nav-offset)) 24px 24px;
   background: transparent;
-  scroll-margin-top: var(--section-nav-offset);
+  scroll-margin-top: 0;
 }
 
 .skills-content {
@@ -481,8 +485,8 @@ html {
   /* Keep wide carousel content from making the section's grid column wider than the viewport. */
   grid-template-columns: minmax(0, 1fr);
   min-height: 100svh;
-  align-items: center;
-  padding: 28px 24px 32px;
+  align-items: start;
+  padding: calc(28px + var(--section-nav-offset)) 24px 32px;
   background: transparent;
   scroll-margin-top: 0;
 }
@@ -525,7 +529,7 @@ html {
 
 @media (max-width: 640px) {
   :root {
-    --section-nav-offset: 0px;
+    --section-nav-offset: 24px;
   }
 
   .site-footer {
@@ -722,9 +726,9 @@ html {
   }
 
   .site-header::before {
-    background: rgba(8, 12, 20, .54);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   .site-header.is-scrolled {
@@ -732,7 +736,7 @@ html {
   }
 
   .site-header.is-scrolled::before {
-    background: rgba(8, 12, 20, .72);
+    background: rgba(8, 12, 20, .25);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
   }
@@ -767,7 +771,7 @@ html {
   .about-section,
   .skills-section,
   .projects-section {
-    scroll-margin-top: var(--section-nav-offset);
+    scroll-margin-top: 0;
   }
 
   .particle-scroll-space {
@@ -775,18 +779,18 @@ html {
   }
 
   .about-section {
-    min-height: calc(100svh - var(--section-nav-offset));
-    padding: 20px 18px;
+    min-height: 100svh;
+    padding: calc(20px + var(--section-nav-offset)) 18px 20px;
   }
 
   .skills-section {
-    min-height: calc(100svh - var(--section-nav-offset));
-    padding: 20px 18px;
+    min-height: 100svh;
+    padding: calc(20px + var(--section-nav-offset)) 18px 20px;
   }
 
   .projects-section {
     min-height: 100svh;
-    padding: 20px 18px 28px;
+    padding: calc(20px + var(--section-nav-offset)) 18px 28px;
   }
 
   .particle-blend {
@@ -822,8 +826,9 @@ html {
 }
 
 @media (max-width: 360px) {
-  .home-link {
-    display: none;
+  .site-nav {
+    gap: 5px;
+    font-size: 10px;
   }
 }
 
