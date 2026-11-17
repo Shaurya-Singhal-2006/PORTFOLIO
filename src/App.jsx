@@ -288,7 +288,7 @@ function App() {
       <footer className="site-footer" aria-label="Portfolio footer">
         <CurvedLoop
           marqueeText={FOOTER_WORDMARK[0]}
-          speed={2.2}
+          speed={1.2}
           curveAmount={94}
           direction="left"
           interactive={true}
