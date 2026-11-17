@@ -109,7 +109,7 @@ html {
 }
 
 .hero-wordmark {
-  --hero-content-inset: clamp(52px, 9vw, 130px);
+  --hero-content-inset: clamp(86px, calc(10vw + 24px), 164px);
   position: absolute;
   z-index: 3;
   top: 50%;
@@ -129,7 +129,7 @@ html {
 }
 
 .hero-wordmark-text {
-  font-size: clamp(64px, 7.5vw, 116px) !important;
+  font-size: clamp(70px, 8.2vw, 122px) !important;
   justify-content: flex-start !important;
   gap: clamp(16px, 5vw, 48px);
   letter-spacing: 0;
@@ -144,7 +144,7 @@ html {
   gap: 3px;
   margin: 0;
   color: rgba(245, 243, 241, .9);
-  font: 500 clamp(18px, 1.5vw, 24px)/1.45 'Inter', 'Segoe UI', sans-serif;
+  font: 500 clamp(19px, 1.7vw, 25px)/1.45 'Inter', 'Segoe UI', sans-serif;
   letter-spacing: .005em;
   text-shadow: 0 2px 18px rgba(0, 0, 0, .75);
   max-width: min(100%, 880px);
@@ -180,7 +180,7 @@ html {
   padding: 0 22px;
   border: 1px solid transparent;
   border-radius: 999px;
-  font: 650 15px/1 'Inter', 'Segoe UI', sans-serif;
+  font: 650 16px/1 'Inter', 'Segoe UI', sans-serif;
   transition: transform .2s ease, background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
 
@@ -609,7 +609,7 @@ html {
   }
 
   .hero-wordmark {
-    left: 28px;
+    left: 58px;
     width: min(calc(100vw - 56px), 420px);
     gap: 5px;
   }
