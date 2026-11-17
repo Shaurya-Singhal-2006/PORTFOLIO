@@ -50,7 +50,7 @@ const cardData = [
 const profileLinks = [
   { name: 'LeetCode', href: 'https://leetcode.com/u/Shaurya-Singhal-2006', icon: 'leetcode' },
   { name: 'GitHub', href: 'https://github.com/Shaurya-Singhal-2006', icon: 'github' },
-  { name: 'LinkedIn', href: 'https://linkedin.com/in/shaurya-singhal-b37aaa376', icon: 'linkedin' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/shauryasinghal2006/', icon: 'linkedin' },
   { name: 'Gmail', href: 'https://mail.google.com/mail/?view=cm&fs=1&to=shauryasinghal206%40gmail.com', icon: 'email' }
 ];
 
