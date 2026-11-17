@@ -1,0 +1,54 @@
+/* Repeating marquee rows. ScrollVelocity.jsx positions and curves each letter. */
+.scroll-velocity {
+  width: 100%;
+  overflow: hidden;
+}
+
+.scroll-velocity-row {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 8px 0 clamp(30px, 5vw, 84px);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.scroll-velocity-track {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.scroll-velocity-copy {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: clamp(12px, 2vw, 24px);
+  padding-right: clamp(12px, 2vw, 24px);
+  color: rgba(241, 246, 255, .9);
+  font: 700 clamp(42px, 8vw, 132px)/1 'Inter', 'Segoe UI', sans-serif;
+  letter-spacing: -.055em;
+}
+
+.scroll-velocity-word {
+  display: inline-flex;
+  align-items: center;
+}
+
+.scroll-velocity-letter {
+  display: inline-block;
+  transform-origin: center center;
+}
+
+.scroll-velocity-separator {
+  color: #70adff;
+  font-size: 1em;
+  line-height: 1;
+  transform-origin: center center;
+  text-shadow: 0 0 18px rgba(112, 173, 255, .38);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-velocity-track { will-change: auto; }
+}

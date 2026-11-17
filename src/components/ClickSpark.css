@@ -1,0 +1,15 @@
+/* Full-screen canvas that draws brief sparks at pointer clicks. */
+.click-spark-layer {
+  position: fixed;
+  z-index: 30;
+  inset: 0;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .click-spark-layer { display: none; }
+}

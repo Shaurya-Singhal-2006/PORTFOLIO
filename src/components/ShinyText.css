@@ -1,0 +1,43 @@
+/* Text color and shine timing are set by custom properties from ShinyText.jsx. */
+.shiny-text {
+  display: inline-block;
+  color: var(--shiny-color, #b5b5b5);
+  background-image: linear-gradient(
+    var(--shiny-angle, 120deg),
+    var(--shiny-color, #b5b5b5) 0%,
+    var(--shiny-color, #b5b5b5) 38%,
+    var(--shiny-highlight, #fff) 50%,
+    var(--shiny-color, #b5b5b5) 62%,
+    var(--shiny-color, #b5b5b5) 100%
+  );
+  background-size: 220% auto;
+  background-position: 150% center;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shiny-text-sweep var(--shiny-duration, 2s) linear var(--shiny-delay, 0s) infinite;
+}
+
+.shiny-text--right { animation-direction: reverse; }
+.shiny-text--yoyo { animation-direction: alternate; }
+.shiny-text--right.shiny-text--yoyo { animation-direction: alternate-reverse; }
+
+.shiny-text--disabled {
+  background: none;
+  color: var(--shiny-color, #b5b5b5);
+  -webkit-text-fill-color: currentColor;
+  animation: none;
+}
+
+@media (hover: hover) {
+  .shiny-text--pause-hover:hover { animation-play-state: paused; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shiny-text { animation: none; background-position: center; }
+}
+
+@keyframes shiny-text-sweep {
+  from { background-position: 150% center; }
+  to { background-position: -50% center; }
+}

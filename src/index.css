@@ -1,0 +1,39 @@
+/* Shared browser defaults used by every page section and component. */
+:root {
+  --portfolio-cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path fill='%23FFF' stroke='%23000' stroke-width='2' d='M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.35Z'/></svg>") 5 3, auto;
+  color-scheme: dark;
+  background: #111;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { width: 100%; min-width: 280px; min-height: 100%; margin: 0; }
+html, body { overflow-x: clip; }
+html, body { scrollbar-width: none; }
+html::-webkit-scrollbar,
+body::-webkit-scrollbar { display: none; }
+html.intro-active,
+html.intro-active body { overflow: hidden; }
+body { min-height: 100vh; }
+body { cursor: var(--portfolio-cursor); }
+a { color: inherit; text-decoration: none; }
+button, a { cursor: var(--portfolio-cursor); -webkit-tap-highlight-color: transparent; }
+/* Keyboard users can tab to this link to jump past the visual intro. */
+.skip-link {
+  position: fixed;
+  z-index: 2000;
+  top: 12px;
+  left: 12px;
+  padding: 10px 14px;
+  transform: translateY(-160%);
+  border: 1px solid rgba(120, 181, 255, .55);
+  border-radius: 8px;
+  background: #111820;
+  color: #f5f8ff;
+  font: 600 14px/1.2 'Inter', 'Segoe UI', sans-serif;
+  transition: transform .18s ease;
+}
+.skip-link:focus { transform: translateY(0); }

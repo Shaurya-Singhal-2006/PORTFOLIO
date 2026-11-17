@@ -1,0 +1,205 @@
+/* The gallery lays skill panels side-by-side on desktop and stacks them on small screens. */
+.accordion-gallery {
+  --ag-accent: #79b2ff;
+  --ag-overlay: transparent;
+  --ag-text: #f5f8ff;
+  --ag-gap: 12px;
+  --ag-radius: 18px;
+  --ag-media-size: 320px;
+  display: flex;
+  flex-direction: row;
+  gap: var(--ag-gap);
+  width: 100%;
+  max-width: 100%;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+}
+
+.accordion-gallery--vertical { flex-direction: column; }
+
+.ag-panel {
+  position: relative;
+  display: block;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid rgba(130, 177, 244, .2);
+  border-radius: var(--ag-radius);
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+  cursor: var(--portfolio-cursor);
+  text-decoration: none;
+  transform-origin: center center;
+  transform-style: preserve-3d;
+  transition: border-color .25s ease, background .25s ease, box-shadow .25s ease;
+  will-change: flex-grow, transform;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ag-panel:hover {
+  border-color: rgba(121, 178, 255, .44);
+  background: transparent;
+  box-shadow: 0 0 18px rgba(77, 145, 240, .08);
+}
+
+.ag-panel:focus-visible {
+  box-shadow: 0 0 0 2px rgba(121, 178, 255, .85), 0 8px 30px rgba(0, 0, 0, .3);
+}
+
+/* Panel frame holds the skill logos, while the label stays pinned to an edge. */
+.ag-panel__frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.ag-panel__media {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  width: var(--ag-media-size);
+  height: 100%;
+  align-items: flex-start;
+  justify-content: center;
+  will-change: transform;
+}
+
+.accordion-gallery--vertical .ag-panel__media {
+  width: 100%;
+  height: var(--ag-media-size);
+}
+
+.ag-skills-wrapper {
+  width: 100%;
+  max-width: 400px;
+  padding: 36px 28px;
+  opacity: 0;
+  transform: translateX(-14px);
+}
+
+.ag-skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 14px;
+  margin-top: 0;
+}
+
+.ag-skill-logo {
+  display: flex;
+  width: 68px;
+  height: 68px;
+  align-items: center;
+  justify-content: center;
+  padding: 11px;
+  border: 1px solid rgba(133, 182, 250, .2);
+  border-radius: 14px;
+  background: transparent;
+  box-shadow: none;
+  cursor: default;
+  transition: transform .25s cubic-bezier(.34, 1.56, .64, 1), background .2s ease, border-color .2s ease;
+}
+
+.ag-skill-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .3));
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.ag-skill-logo:hover {
+  transform: translateY(-4px) scale(1.04);
+  border-color: rgba(133, 182, 250, .4);
+  background: transparent;
+}
+
+.ag-panel__overlay {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  pointer-events: none;
+}
+
+.ag-panel__label {
+  position: absolute;
+  z-index: 2;
+  bottom: 22px;
+  left: 18px;
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 11px;
+  pointer-events: none;
+}
+
+.ag-panel__bar {
+  flex: 0 0 auto;
+  width: 3px;
+  height: 24px;
+  border-radius: 3px;
+  background: var(--ag-accent);
+  opacity: 0;
+  box-shadow: 0 0 10px rgba(121, 178, 255, .4);
+}
+
+.ag-panel__text {
+  overflow: hidden;
+  color: var(--ag-accent);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-size: clamp(1rem, 1.4vw, 1.45rem);
+  font-weight: 650;
+  letter-spacing: .01em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .55);
+}
+
+/* Tablet and phone layout: stacked panels with a taller selected category. */
+@media (max-width: 899px) {
+  .accordion-gallery {
+    flex-direction: column;
+    height: auto !important;
+    perspective: none;
+  }
+
+  .ag-panel {
+    flex: 0 0 76px;
+    min-height: 76px;
+    transform: none !important;
+  }
+
+  .ag-panel--active {
+    flex-basis: 300px;
+    min-height: 300px;
+  }
+
+  .accordion-gallery .ag-panel__media {
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: var(--ag-media-size);
+  }
+
+  .ag-skills-wrapper { max-width: none; padding: 78px 18px 18px; }
+  .ag-skills-grid { gap: 10px; }
+  .ag-skill-logo { width: 52px; height: 52px; padding: 9px; }
+  .ag-panel__label { bottom: 14px; left: 16px; }
+  .ag-panel:not(.ag-panel--active) .ag-panel__label {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ag-panel,
+  .ag-panel__media,
+  .ag-skill-logo { will-change: auto; transition-duration: .01ms; }
+}

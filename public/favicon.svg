@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bolt-gradient" x1="112" y1="72" x2="394" y2="440" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4b36ff" />
+      <stop offset="1" stop-color="#08bfff" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="#fff" />
+  <path d="M300 96 211 205Q197 222 214 230l108 49-92 126" fill="none" stroke="url(#bolt-gradient)" stroke-width="78" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
